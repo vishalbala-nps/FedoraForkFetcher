@@ -44,7 +44,7 @@ def getforksfn(update, context):
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
 
 #Telegram Initialisation
-fork_updater = Updater(token='803028557:AAHnuHOLSs5zBM50_gkD6_PsFMsfacXJKg0', use_context=True)
+fork_updater = Updater(token='[INSERT TOKEN HERE]', use_context=True)
 f_dispatcher = fork_updater.dispatcher
 
 start_handler = CommandHandler('start', startfn)
