@@ -25,6 +25,9 @@ def listforksfn(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="List of Repos:\n\n"+repo_names)
 
 def getforksfn(update, context):
+    if len(context.args) == 0:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="No repo name given! Please give a repo name")
+        return
     reponame = context.args[0]
     resp = requests.get("https://api.github.com/orgs/fedora-infra/repos")
     if resp.status_code != 200:
@@ -34,7 +37,8 @@ def getforksfn(update, context):
     for i in repo_json:
         if i["name"] == reponame:
             context.bot.send_message(chat_id=update.effective_chat.id, text="The number of forks in the repository "+reponame+" is "+str(i["forks_count"]))
-            break 
+            return
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Invalid repo name "+ reponame +"! Please check the repo name and try again")
 
 #Logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
